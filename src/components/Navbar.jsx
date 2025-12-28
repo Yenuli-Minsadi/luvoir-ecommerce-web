@@ -5,10 +5,15 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user, setUser, setShowUserLogin } = useAppContext();
+  const { user, setUser, setShowUserLogin, navigate } = useAppContext();
+
+  const logout = async() =>{
+    setUser(null);
+    navigate('/')
+  }
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
-      <NavLink to={"/"}>
+      <NavLink to={"/"} onClick={()=> setOpen(false)}>
         <svg
           width="40"
           height="40"
@@ -58,7 +63,7 @@ const Navbar = () => {
           </svg>
         </div>
 
-        <div className="relative cursor-pointer">
+        <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
           <svg
             width="18"
             height="18"
@@ -78,9 +83,47 @@ const Navbar = () => {
           </button>
         </div>
 
-        <button className="cursor-pointer px-8 py-2 bg-green-800 hover:bg-green-900 transition text-white rounded-full">
-          Login
-        </button>
+        {!user ? (
+          <button
+            onClick={() => setShowUserLogin(true)}
+            className="cursor-pointer px-8 py-2 bg-green-800 hover:bg-green-900 transition text-white rounded-full"
+          >
+            Login
+          </button>
+        ) : (
+          <div className="relative group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+            >
+              <path d="M18 20a6 6 0 0 0-12 0" />
+              <circle cx="12" cy="10" r="4" />
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 rounded-md text-sm z-40">
+              <li
+                onClick={()=>navigate("my-orders")}
+                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+              >
+                My Orders
+              </li>
+              <li
+                onClick={logout}
+                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+              >
+                Logout
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
 
       <button
@@ -103,40 +146,47 @@ const Navbar = () => {
       </button>
 
       {/* Mobile Menu */}
-      <div
-        className={`${
-          open ? "flex" : "hidden"
-        } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}
-      >
-        <NavLink to="/" onClick={() => setOpen(false)}>
-          Home
-        </NavLink>
-        <NavLink to="/products" onClick={() => setOpen(false)}>
-          All Products
-        </NavLink>
-        {user && (
-          <NavLink to="/products" onClick={() => setOpen(false)}>
-            My Orders
+      {open && (
+        <div
+          className={`${
+            open ? "flex" : "hidden"
+          } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}
+        >
+          <NavLink to="/" onClick={() => setOpen(false)}>
+            Home
           </NavLink>
-        )}
-        <NavLink to="/" onClick={() => setOpen(false)}>
-          Contact
-        </NavLink>
+          <NavLink to="/products" onClick={() => setOpen(false)}>
+            All Products
+          </NavLink>
+          {user && (
+            <NavLink to="/products" onClick={() => setOpen(false)}>
+              My Orders
+            </NavLink>
+          )}
+          <NavLink to="/" onClick={() => setOpen(false)}>
+            Contact
+          </NavLink>
 
-        {!user ? (
-          <button onClick={()=>{
-            setOpen(false);
-            setShowUserLogin(true);
-          }} className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm">
-            Login
-          </button>
-        ) : (
-          <button className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
-          >
-            Logout
-          </button>
-        )}
-      </div>
+          {!user ? (
+            <button
+              onClick={() => {
+                setOpen(false);
+                setShowUserLogin(true);
+              }}
+              className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              onClick={logout}
+              className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
+            >
+              Logout
+            </button>
+          )}
+        </div>
+      )}
     </nav>
   );
 };
