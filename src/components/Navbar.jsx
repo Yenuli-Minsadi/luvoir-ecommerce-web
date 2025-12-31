@@ -13,7 +13,7 @@ const Navbar = () => {
   }
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
-      <NavLink to={"/"} onClick={()=> setOpen(false)}>
+      <NavLink to={"/"} onClick={() => setOpen(false)}>
         <svg
           width="40"
           height="40"
@@ -63,7 +63,10 @@ const Navbar = () => {
           </svg>
         </div>
 
-        <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
+        <div
+          onClick={() => navigate("/cart")}
+          className="relative cursor-pointer"
+        >
           <svg
             width="18"
             height="18"
@@ -78,7 +81,7 @@ const Navbar = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <button className="absolute -top-2 -right-3 text-xs text-white bg-green-800 w-[18px] h-[18px] rounded-full">
+          <button className="absolute -top-2 -right-3 text-xs text-white bg-rose-950 w-[18px] h-[18px] rounded-full">
             3
           </button>
         </div>
@@ -86,7 +89,7 @@ const Navbar = () => {
         {!user ? (
           <button
             onClick={() => setShowUserLogin(true)}
-            className="cursor-pointer px-8 py-2 bg-green-800 hover:bg-green-900 transition text-white rounded-full"
+            className="cursor-pointer px-8 py-2 bg-zinc-950 hover:bg-rose-950 transition text-white rounded-full"
           >
             Login
           </button>
@@ -110,7 +113,7 @@ const Navbar = () => {
             </svg>
             <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 rounded-md text-sm z-40">
               <li
-                onClick={()=>navigate("my-orders")}
+                onClick={() => navigate("my-orders")}
                 className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
               >
                 My Orders
