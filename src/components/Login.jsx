@@ -1,6 +1,9 @@
 import React from "react";
+import { useAppContext } from "../context/AppContext";
 
 const Login = () => {
+    const {setShowUserLogin, setUser} = useAppContext();
+
   const [state, setState] = React.useState("login");
 
   const [formData, setFormData] = React.useState({
@@ -9,8 +12,13 @@ const Login = () => {
     password: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = async (event)=> {
+    event.preventDefault();
+    setUser({
+        email:"yen@gmail.com",
+        password: "1234"
+    })
+    setShowUserLogin(false)
   };
 
   const handleChange = (e) => {
@@ -29,7 +37,7 @@ const Login = () => {
 
     //   <p className="text-gray-400 text-sm mt-2">Please sign in to continue</p>
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50">
-      <div className="bg-gray-950 rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
+      <div onSubmit={onSubmitHandler} className="bg-gray-950 rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
         {/* Rest of your login form code stays the same */}
         <h2 className="text-2xl font-bold mb-2 text-amber-50">
           {state === "login" ? "Login" : "Sign up"}
@@ -61,7 +69,7 @@ const Login = () => {
               type="text"
               name="name"
               placeholder="Name"
-              className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
+              className="w-full bg-transparent text-black placeholder-gray-400 border-none outline-none "
               value={formData.name}
               onChange={handleChange}
               required
@@ -90,7 +98,7 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Email id"
-            className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
+            className="w-full bg-transparent text-gray-950 placeholder-gray-400 border-none outline-none "
             value={formData.email}
             onChange={handleChange}
             required
@@ -118,7 +126,7 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full bg-white text-white placeholder-gray-400 border-none outline-none"
+            className="w-full bg-white text-gray-950 placeholder-gray-400 border-none outline-none"
             value={formData.password}
             onChange={handleChange}
             required
