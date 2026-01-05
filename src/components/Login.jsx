@@ -37,7 +37,10 @@ const Login = () => {
 
     //   <p className="text-gray-400 text-sm mt-2">Please sign in to continue</p>
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50">
-      <div onSubmit={onSubmitHandler} className="bg-gray-950 rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
+      <form
+        onSubmit={onSubmitHandler}
+        className="bg-gray-950 rounded-lg shadow-xl p-8 w-full max-w-md mx-4"
+      >
         {/* Rest of your login form code stays the same */}
         <h2 className="text-2xl font-bold mb-2 text-amber-50">
           {state === "login" ? "Login" : "Sign up"}
@@ -45,7 +48,7 @@ const Login = () => {
         <p className="text-gray-500 mb-6">Please sign in to continue</p>
 
         {state !== "login" && (
-          <div className="flex items-center mt-6 w-full bg-gray-800 border border-gray-700 h-12 rounded-full overflow-hidden pl-6 gap-2 ">
+          <div className="flex items-center mt-6 w-full bg-white border border-gray-700 h-12 rounded-full overflow-hidden pl-6 gap-2 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -157,7 +160,7 @@ const Login = () => {
             : "Already have an account?"}
           <span className="text-cyan-200 hover:underline ml-1">click here</span>
         </p>
-      </div>
+      </form>
     </div>
   );
 };

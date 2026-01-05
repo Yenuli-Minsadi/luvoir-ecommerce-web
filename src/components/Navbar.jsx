@@ -29,7 +29,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="hidden sm:flex items-center gap-8">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/poducts">All Products</NavLink>
+        <NavLink to="/products">All Products</NavLink>
         <NavLink to="/">Contact</NavLink>
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-400 px-3 rounded-full">
@@ -94,6 +94,38 @@ const Navbar = () => {
             Login
           </button>
         ) : (
+          // <div className="relative group">
+          //   <svg
+          //     xmlns="http://www.w3.org/2000/svg"
+          //     width="24"
+          //     height="24"
+          //     viewBox="0 0 24 24"
+          //     fill="none"
+          //     stroke="currentColor"
+          //     strokeWidth="2"
+          //     strokeLinecap="round"
+          //     strokeLinejoin="round"
+          //     class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+          //   >
+          //     <path d="M18 20a6 6 0 0 0-12 0" />
+          //     <circle cx="12" cy="10" r="4" />
+          //     <circle cx="12" cy="12" r="10" />
+          //   </svg>
+          //   <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 rounded-md text-sm z-40">
+          //     <li
+          //       onClick={() => navigate("my-orders")}
+          //       className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+          //     >
+          //       My Orders
+          //     </li>
+          //     <li
+          //       onClick={logout}
+          //       className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+          //     >
+          //       Logout
+          //     </li>
+          //   </ul>
+          // </div>
           <div className="relative group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,22 +137,22 @@ const Navbar = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+              className="lucide lucide-circle-user-round-icon lucide-circle-user-round cursor-pointer"
             >
               <path d="M18 20a6 6 0 0 0-12 0" />
               <circle cx="12" cy="10" r="4" />
               <circle cx="12" cy="12" r="10" />
             </svg>
-            <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 rounded-md text-sm z-40">
+            <ul className="hidden group-hover:block absolute top-6 right-0 bg-white shadow-lg border border-gray-200 py-2.5 rounded-md text-sm z-40 min-w-[120px]">
               <li
                 onClick={() => navigate("my-orders")}
-                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
               >
                 My Orders
               </li>
               <li
                 onClick={logout}
-                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer whitespace-nowrap"
               >
                 Logout
               </li>
