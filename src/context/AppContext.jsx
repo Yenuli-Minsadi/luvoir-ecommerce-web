@@ -11,8 +11,9 @@ const productsData = [
     offerPrice: 50000,
     rating: 4,
     inStock: true,
-    image:
-      ["https://i.pinimg.com/1200x/e2/1c/a9/e21ca9af8bfc7818f525f0123a3179a6.jpg"],
+    image: [
+      "https://i.pinimg.com/1200x/e2/1c/a9/e21ca9af8bfc7818f525f0123a3179a6.jpg",
+    ],
   },
   {
     id: 2,
@@ -21,8 +22,10 @@ const productsData = [
     price: 85000,
     offerPrice: 65000,
     rating: 5,
-    image:
-      ["https://i.pinimg.com/736x/3a/f4/e3/3af4e3652a640bdcc98a6e9157b39aa2.jpg"],
+    inStock: true,
+    image: [
+      "https://i.pinimg.com/736x/3a/f4/e3/3af4e3652a640bdcc98a6e9157b39aa2.jpg",
+    ],
   },
   {
     id: 3,
@@ -31,8 +34,10 @@ const productsData = [
     price: 95000,
     offerPrice: 75000,
     rating: 5,
-    image:
-      ["https://i.pinimg.com/736x/23/d6/04/23d60413192f88392dfcb7dcaf2d2193.jpg"],
+    inStock: true,
+    image: [
+      "https://i.pinimg.com/736x/23/d6/04/23d60413192f88392dfcb7dcaf2d2193.jpg",
+    ],
   },
   {
     id: 4,
@@ -41,8 +46,10 @@ const productsData = [
     price: 45000,
     offerPrice: 35000,
     rating: 4,
-    image:
-      ["https://i.pinimg.com/1200x/59/9d/a8/599da8af325251af7545377bfb790622.jpg"],
+    inStock: true,
+    image: [
+      "https://i.pinimg.com/1200x/59/9d/a8/599da8af325251af7545377bfb790622.jpg",
+    ],
   },
 ];
 
