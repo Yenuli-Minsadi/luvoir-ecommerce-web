@@ -8,9 +8,7 @@ const categoriesData = [
   { text: "Bracelets", path: "bracelets", bgColor: "#f5f5dc", image: bracelet },
   { text: "Rings", path: "rings", bgColor: "#f5f5dc", image: bracelet },
   { text: "Earrings", path: "earrings", bgColor: "#f5f5dc", image: bracelet },
-  { text: "Bracelets", path: "bracelets", bgColor: "#f5f5dc", image: bracelet },
-  { text: "Necklaces", path: "necklaces", bgColor: "#f5f5dc", image: bracelet },
-  { text: "Rings", path: "rings", bgColor: "#f5f5dc", image: bracelet },
+
   // Add more categories as needed
 ];
 
