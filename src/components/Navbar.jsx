@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery } = useAppContext();
+  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount } = useAppContext();
 
   const logout = async() =>{
     setUser(null);
@@ -90,7 +90,7 @@ const Navbar = () => {
             />
           </svg>
           <button className="absolute -top-2 -right-3 text-xs text-white bg-rose-950 w-[18px] h-[18px] rounded-full">
-            3
+            {getCartCount()}
           </button>
         </div>
 
@@ -202,7 +202,7 @@ const Navbar = () => {
             All Products
           </NavLink>
           {user && (
-            <NavLink to="/products" onClick={() => setOpen(false)}>
+            <NavLink to="/my-orders" onClick={() => setOpen(false)}>
               My Orders
             </NavLink>
           )}

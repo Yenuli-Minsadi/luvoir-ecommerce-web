@@ -56,40 +56,73 @@ const productsData = [
 export const AppContext = createContext();
 
 export const AppContextProvider = ({children})=>{
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null)
-    const [isSeller, setIsSeller] = useState(false);
-    const [showUserLogin, setShowUserLogin] = useState(false);
-    const [productsState, setProductsState] = useState([])//fixed
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [isSeller, setIsSeller] = useState(false);
+  const [showUserLogin, setShowUserLogin] = useState(false);
+  const [productsState, setProductsState] = useState([]);//fixed
 
-    const [cartItems, setCartItems] = useState({})
-    const [searchQuery, setSearchQuery] = useState({});
+  const [cartItems, setCartItems] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const fetchProducts = async ()=> {
-        setProductsState(productsData)
+  const fetchProducts = async () => {
+    setProductsState(productsData);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  //log to check when cart items changes
+  useEffect(() => {
+    console.log("Cart items updated:", cartItems);
+    console.log("Cart count:", getCartCount());
+  }, [cartItems]);
+
+  //get cart item count
+  const getCartCount = () => {
+    let totalCount = 0;
+    for (const item in cartItems) {
+      totalCount += cartItems[item];
     }
+    return totalCount;
+  };
 
-    useEffect(()=>{
-      fetchProducts()
-    },[])
+  //get cart total amount
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (const items in cartItems) {
+      if (cartItems[items] > 0) {
+        //use productsState and product.id, convert items to Number
+        const itemInfo = productsState.find(
+          (product) => product.id === Number(items)
+        );
+        if (itemInfo) {
+          totalAmount += itemInfo.offerPrice * cartItems[items];
+        }
+      }
+    }
+    return Math.floor(totalAmount * 100) / 100;
+  };
 
+  const value = {
+    navigate,
+    user,
+    setUser,
+    setIsSeller,
+    isSeller,
+    showUserLogin,
+    setShowUserLogin,
+    products: productsState,
+    searchQuery,
+    setSearchQuery,
+    cartItems,
+    setCartItems,
+    getCartCount,
+    getCartAmount
+  };
 
-    const value = {
-      navigate,
-      user,
-      setUser,
-      setIsSeller,
-      isSeller,
-      showUserLogin,
-      setShowUserLogin,
-      products: productsState,
-      searchQuery,
-      setSearchQuery
-    };
-
-    return <AppContext.Provider value={value}>
-        {children}
-        </AppContext.Provider>;
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
 export const useAppContext = ()=>{

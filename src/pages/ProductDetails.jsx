@@ -4,7 +4,7 @@ import { useAppContext } from "../context/AppContext";
 
 const ProductDetails = () => {
   const { category, id } = useParams();
-  const { products } = useAppContext();
+  const { products, cartItems, setCartItems } = useAppContext();
   const navigate = useNavigate();
 
   const product = products.find((p) => p.id === parseInt(id));
@@ -17,10 +17,27 @@ const ProductDetails = () => {
     );
   }
 
+  //add to cart function
+  const addToCart = () => {
+    setCartItems((prev) => ({
+      ...prev,
+      [product.id]: (prev[product.id] || 0) + 1,
+    }));
+  };
+
+  //buy now function
+  const buyNow = () => {
+    setCartItems((prev) => ({
+      ...prev,
+      [product.id]: (prev[product.id] || 0) + 1,
+    }));
+    navigate("/cart");
+  };
+
   //related products from same category
-  const relatedProducts = products.filter(
-    (p)=> p.category === product.category && p.id !== product.id
-  ).slice(0,4);//limit to 4
+  const relatedProducts = products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);//limit to 4
 
   return (
     <div className="mt-16 min-h-screen">
@@ -66,55 +83,61 @@ const ProductDetails = () => {
             </p>
           </div>
 
-          <button className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium transition">
+          <button
+            onClick={addToCart}
+            className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium transition"
+          >
             Add to Cart
           </button>
-          <button className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium transition">
+          <button
+            onClick={buyNow}
+             className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium transition"
+          >
             Buy Now
           </button>
         </div>
       </div>
       <div className="mt-16">
-        <h2 text-2xl font-bold mb-8>Related Products</h2>
-        <div grid grid-cols-2 md:grid-cols-4 gap-6>
-            {relatedProducts
-            .filter((product)=> product.inStock)
-            .map((product)=>(
+        <h2 className="text-2xl font-bold mb-8">Related Products</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {relatedProducts
+            .filter((product) => product.inStock)
+            .map((product) => (
               <div
-               key={product.id}
-               className="border rounded-lg p-4 hover:shadow-lgtransition cursor-pointer"
-               onClick={()=> {
-                navigate(`/products/$(product.category)/${product.id}`);
-                window.scrollTo(0, 0);
-               }}
-               >
+                key={product.id}
+                className="border rounded-lg p-4 hover:shadow-lgtransition cursor-pointer"
+                onClick={() => {
+                  navigate(`/products/$(product.category)/${product.id}`);
+                  window.scrollTo(0, 0);
+                }}
+              >
                 <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-40 object-contain mb-4"
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-40 object-contain mb-4"
                 />
                 <h3 className="font-semibold mb-2 truncate">{product.name}</h3>
                 <div className="flex items-center gap-2">
-                  <span>
-                    ${product.offerPrice}
-                  </span>
+                  <span>${product.offerPrice}</span>
                   <span className="text-sm text-gray-400 line-through">
                     ${product.price}
                   </span>
                 </div>
-                </div>
+              </div>
             ))}
         </div>
 
-        <button onClick={()=> {
-          navigate('/products');
-          window.scrollTo(0,0);
-        }}
-        className="mx-auto block px-12 py-3 my-16 border rounded text-rimary hover:bg-primary/10 transition"
-        >See More
+        <button
+          onClick={() => {
+            navigate("/products");
+            window.scrollTo(0, 0);
+          }}
+          className="mx-auto block px-12 py-3 my-16 border rounded text-rimary hover:bg-primary/10 transition"
+        >
+          See More
         </button>
-        </div>
       </div>
+    </div>
   );
 };
 
